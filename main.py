@@ -11,7 +11,11 @@ from typing import Optional, List, Dict
 import pytz
 from dateutil import parser, relativedelta
 
-import pyaudio
+try:
+    import pyaudio  # Local/dev only; not available on most cloud hosts
+    HAS_PYAUDIO = True
+except Exception:
+    HAS_PYAUDIO = False
 import assemblyai as aai
 from fastapi import FastAPI, WebSocket, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -93,7 +97,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 # Audio config (AssemblyAI input is 16000, Murf output is 44100)
 SAMPLE_RATE = 16000
 CHANNELS = 1
-FORMAT = pyaudio.paInt16
+FORMAT = pyaudio.paInt16 if HAS_PYAUDIO else None
 FRAMES_PER_BUFFER = 1600
 
 # Chat history file
@@ -727,8 +731,8 @@ async def ws_handler(websocket: WebSocket):
     await websocket.accept()
     log.info("WebSocket connected")
 
-    py_audio: Optional[pyaudio.PyAudio] = None
-    mic_stream: Optional[pyaudio.Stream] = None
+    py_audio: Optional[object] = None
+    mic_stream: Optional[object] = None
     audio_thread: Optional[threading.Thread] = None
     stop_event = threading.Event()
     recorded_frames: List[bytes] = []
@@ -803,6 +807,8 @@ async def ws_handler(websocket: WebSocket):
         nonlocal mic_stream, py_audio
         log.info("Starting audio streaming thread")
         try:
+            if not HAS_PYAUDIO:
+                raise RuntimeError("PyAudio not available on this host. Use the UI without local mic streaming.")
             py_audio = pyaudio.PyAudio()
             mic_stream = py_audio.open(
                 input=True,
