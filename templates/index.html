@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Voice Agent - Day 27 🎙️</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Sidebar Configuration Panel -->
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h3><i class="fas fa-cog"></i> Configuration</h3>
+          <button class="close-sidebar" id="closeSidebar">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <div class="config-section">
+          <h4><i class="fas fa-key"></i> API Keys</h4>
+          <p class="config-description">Configure your API keys to enable all features</p>
+          
+          <div class="api-key-group">
+            <label for="aaiKey">AssemblyAI API Key</label>
+            <div class="input-group">
+              <input type="password" id="aaiKey" placeholder="Enter AssemblyAI API key">
+              <button class="test-btn" data-service="aai">
+                <i class="fas fa-check"></i>
+              </button>
+            </div>
+            <div class="status-indicator" id="aaiStatus"></div>
+          </div>
+          
+          <div class="api-key-group">
+            <label for="geminiKey">Google Gemini API Key</label>
+            <div class="input-group">
+              <input type="password" id="geminiKey" placeholder="Enter Gemini API key">
+              <button class="test-btn" data-service="gemini">
+                <i class="fas fa-check"></i>
+              </button>
+            </div>
+            <div class="status-indicator" id="geminiStatus"></div>
+          </div>
+          
+          <div class="api-key-group">
+            <label for="murfKey">Murf AI API Key</label>
+            <div class="input-group">
+              <input type="password" id="murfKey" placeholder="Enter Murf AI API key">
+              <button class="test-btn" data-service="murf">
+                <i class="fas fa-check"></i>
+              </button>
+            </div>
+            <div class="status-indicator" id="murfStatus"></div>
+          </div>
+          
+          <div class="config-actions">
+            <button class="save-config-btn" id="saveConfig">
+              <i class="fas fa-save"></i> Save Configuration
+            </button>
+            <button class="test-all-btn" id="testAll">
+              <i class="fas fa-vial"></i> Test All Keys
+            </button>
+          </div>
+        </div>
+        
+        <div class="config-section">
+          <h4><i class="fas fa-info-circle"></i> Quick Start</h4>
+          <div class="quick-start">
+            <p><strong>1.</strong> Enter your API keys above</p>
+            <p><strong>2.</strong> Test the keys to ensure they work</p>
+            <p><strong>3.</strong> Start chatting with your pirate AI!</p>
+          </div>
+        </div>
+        
+        <div class="config-section">
+          <h4><i class="fas fa-lightbulb"></i> Example Questions</h4>
+          <div class="example-questions">
+            <div class="question-category">
+              <h5>🌤️ Weather</h5>
+              <ul>
+                <li>"What's the weather in Tokyo?"</li>
+                <li>"How's the weather in London?"</li>
+              </ul>
+            </div>
+            <div class="question-category">
+              <h5>⏰ Time & Date</h5>
+              <ul>
+                <li>"What time is it in Paris?"</li>
+                <li>"How many days until Christmas?"</li>
+                <li>"What day is January 15th, 2025?"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <header class="main-header">
+          <div class="header-left">
+            <button class="config-toggle" id="configToggle">
+              <i class="fas fa-cog"></i>
+            </button>
+            <div class="title-section">
+              <h1>AI Voice Agent - Day 27 🎙️</h1>
+              <p>Dual Special Skills: Weather & Time Powers! 🌤️⏰</p>
+            </div>
+          </div>
+          <div class="header-right">
+            <div class="connection-status" id="connectionStatus">
+              <i class="fas fa-circle"></i>
+              <span>Connecting...</span>
+            </div>
+          </div>
+        </header>
+        
+        <!-- Main Interface -->
+        <div class="main-interface">
+          <!-- Control Panel -->
+          <div class="control-panel">
+            <div class="control-buttons">
+              <button id="startBtn" class="control-btn start-btn">
+                <i class="fas fa-microphone"></i>
+                <span>Start Transcription</span>
+              </button>
+              <button id="stopBtn" class="control-btn stop-btn" style="display: none">
+                <i class="fas fa-stop"></i>
+                <span>Stop Transcription</span>
+              </button>
+              <button id="retryBtn" class="control-btn retry-btn" style="display: none">
+                <i class="fas fa-redo"></i>
+                <span>Retry</span>
+              </button>
+            </div>
+            <div class="status-display" id="status">
+              <i class="fas fa-clock"></i>
+              <span>Status: Idle ⏳</span>
+            </div>
+          </div>
+          
+          <!-- Content Area -->
+          <div class="content-area">
+            <!-- Transcription Panel -->
+            <div class="panel transcription-panel">
+              <div class="panel-header">
+                <h2><i class="fas fa-comments"></i> Live Conversation</h2>
+                <div class="panel-actions">
+                  <button class="clear-btn" id="clearTranscription">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="panel-content">
+                <div id="transcription" class="transcription-content">
+                  <div class="welcome-message">
+                    <i class="fas fa-anchor"></i>
+                    <h3>Ahoy Matey! 🏴‍☠️</h3>
+                    <p>I'm your pirate AI assistant with weather and time powers! Click "Start Transcription" to begin our adventure.</p>
+                  </div>
+                  <div id="transcriptionText" class="transcription-text"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Chat History Panel -->
+            <div class="panel chat-history-panel">
+              <div class="panel-header">
+                <h2><i class="fas fa-history"></i> Chat History</h2>
+                <div class="panel-actions">
+                  <button class="clear-btn" id="clearHistory">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="panel-content">
+                <div id="chatHistory" class="chat-history-content">
+                  <div class="loading-message">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Loading chat history...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Notification Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+    
+    <script src="/static/index.js"></script>
+  </body>
+</html>

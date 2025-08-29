@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: murf-voice-agent
+    env: python
+    plan: free
+    region: oregon
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.1
+      - key: AAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: MURF_API_KEY
+        sync: false
+      - key: MURF_WS_URL
+        value: https://api.murf.ai/v1/speech/stream-input
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/uploads
+      sizeGB: 1

@@ -1,0 +1,22 @@
+[
+  {
+    "timestamp": "2025-08-26T08:31:07.731129",
+    "user_query": "What is a websocket?",
+    "ai_response": "Ahoy, matey! A WebSocket be like a magical, two-way talking tube 'tween yer ship (the client) and the mainland (the server). Unlike sendin' messages in bottles (HTTP), this tube stays open, allowin' messages to be swapped back and forth real-time, quick as a wink! Aye, 'tis how ye get live updates and speedy interactions.\n"
+  },
+  {
+    "timestamp": "2025-08-27T00:59:49.850919",
+    "user_query": "How is the weather in London?",
+    "ai_response": "Ahoy there, matey!\n\nThe weather in London be lookin' grand! We've got a sunny sky, the temperature be 25 degrees Celsius, feelin' just like 25 degrees. The wind's blowin' at 18.0 kilometers per hour, and the humidity be 41%. Pressure's at 1006 hPa. A fine day for sailin', aye!\n"
+  },
+  {
+    "timestamp": "2025-08-28T07:23:43.437801",
+    "user_query": "What is the current time and whether in Singapore.",
+    "ai_response": "Ahoy, matey! Shiver me timbers, it be 7:23 AM in Singapore this fine Thursday, August 28, 2025. The weather be partly cloudy with a temperature o' 27\u00b0C, but feels like 30\u00b0C with the humidity. Fair winds be blowin' at 13 km/h!\n"
+  },
+  {
+    "timestamp": "2025-08-28T07:23:55.202297",
+    "user_query": "What is the current time and whether in Singapore.",
+    "ai_response": "Ahoy matey! Shiver me timbers, here be the weather and time in Singapore:\n\n*   **Time:** The hour be 07:23 AM on Thursday, August 28, 2025, in Singapore.\n*   **Weather:** Partly cloudy skies with a temperature o' 27\u00b0C (feels like 30\u00b0C). Winds be blowin' at 13.0 km/h, and humidity be at 79%. Pressure be 1011 hPa. Aye, fair weather for a day at sea!\n"
+  }
+]
